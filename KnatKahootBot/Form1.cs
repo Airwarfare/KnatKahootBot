@@ -27,31 +27,29 @@ namespace KnatKahootBot
             InitializeComponent();
             metroTextBox1.Text = "Username";
             metroTextBox2.Text = "Password";
-            metroTextBox1.Enter += MetroTextBox1_GotFocus;
-            metroTextBox2.Enter += MetroTextBox2_GotFocus;
+            metroTextBox3.Text = "Quiz Title";
+            metroTextBox4.Text = "Quiz Description";
+            metroTextBox1.Enter += RemoveText;
+            metroTextBox2.Enter += RemoveText;
+            metroTextBox3.Enter += RemoveText;
+            metroTextBox4.Enter += RemoveText;
             metroTextBox1.Visible = false;
             metroTextBox2.Visible = false;
             metroButton1.Visible = false;
         }
 
-        private void MetroTextBox2_GotFocus(object sender, EventArgs e)
+        private void RemoveText(object sender, EventArgs e)
         {
             MetroTextBox tb = (MetroTextBox)sender;
+            if(tb.Text == "Password")
+                tb.UseSystemPasswordChar = true;
             tb.Text = string.Empty;
-            tb.UseSystemPasswordChar = true;
-            metroTextBox2.Enter -= MetroTextBox2_GotFocus;
-        }
-
-        private void MetroTextBox1_GotFocus(object sender, EventArgs e)
-        {
-            MetroTextBox tb = (MetroTextBox)sender;
-            tb.Text = string.Empty;
-            metroTextBox1.Enter -= MetroTextBox1_GotFocus;
+            tb.Enter -= RemoveText;
         }
 
         public void Login(string username, string password)
         {
-            cd = new ChromeDriver(@"C:\Users\jorda\Desktop\");
+            cd = new ChromeDriver(@"C:\Users\Jordan\Desktop\");
             cd.Navigate().GoToUrl("https://create.kahoot.it/login");
             var LoginBox = cd.FindElement(By.CssSelector("#username-input-field__input"));
             var PassBox = cd.FindElement(By.CssSelector("#password-input-field__input"));
@@ -79,8 +77,8 @@ namespace KnatKahootBot
                         var QuizTitle = cd.FindElement(By.CssSelector("#kahoot-title-input-field__input"));
                         var QuizDesc = cd.FindElement(By.CssSelector("#kahoot-description-input-field__input"));
                         var ComboBox = new SelectElement(cd.FindElement(By.CssSelector("#kahoot-audience-dropdown-list__select")));
-                        QuizTitle.SendKeys("Temp Title");
-                        QuizDesc.SendKeys("Temp Desc");
+                        QuizTitle.SendKeys(metroTextBox3.Text);
+                        QuizDesc.SendKeys(metroTextBox4.Text);
                         ComboBox.SelectByIndex(1);
                         break;
                     }
@@ -123,7 +121,7 @@ namespace KnatKahootBot
 
         public void CreateQuestion()
         {
-            File.Delete(@"C:\Users\jorda\Downloads\test.jpg");
+            File.Delete(@"C:\Users\Jordan\Downloads\test.jpg");
             while (true)
             {
                 try
@@ -148,6 +146,8 @@ namespace KnatKahootBot
                     foreach (var s in Fakes)
                         Console.WriteLine("Fakes: " + s);
                     bool answer = false;
+                    Random r = new Random();
+                    int randomnumber = r.Next(0, 4);
                     for (int i = 0; i < 4; i++)
                     {
                         string cssSelect = "";
@@ -161,7 +161,7 @@ namespace KnatKahootBot
                             cssSelect = "#app > div > div > div > main > form > div:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div > div > div.icon-toggle.answer-input-field__icon-toggle > label";
                         var Input = cd.FindElement(By.CssSelector("#ql-editor-" + (i + 2)));            
                         Console.WriteLine("Fakes Count: " + Fakes.Count);
-                        Random r = new Random(590);
+
                         if (answer)
                         {
                             Input.SendKeys(Fakes[0]);
@@ -169,7 +169,7 @@ namespace KnatKahootBot
                         }
                         else
                         {
-                            if (r.Next(0, 4) == 2)
+                            if (i == randomnumber)
                             {
                                 Input.SendKeys(testinput[count]);
                                 var CheckBox = cd.FindElement(By.CssSelector(cssSelect));
@@ -192,13 +192,25 @@ namespace KnatKahootBot
                     }
                     string html = GetHtmlCode();
                     List<string> urls = GetUrls(html);
-                    byte[] image = GetImage(urls[0]);
+                    byte[] image = GetImage(urls[r.Next(0,4)]);
                     using (var ms = new MemoryStream(image))
                     {
-                        Image.FromStream(ms).Save(@"C:\Users\jorda\Downloads\test.jpg");
+                        Image.FromStream(ms).Save(@"C:\Users\Jordan\Downloads\test.jpg");
                     }
                     var Test = cd.FindElement(By.CssSelector("#image-uploader"));
-                    Test.SendKeys(@"C:\Users\jorda\Downloads\test.jpg");
+                    Test.SendKeys(@"C:\Users\Jordan\Downloads\test.jpg");
+                    while(true)
+                    {
+                        try
+                        {
+                            var Image = cd.FindElement(By.CssSelector("#app > div > div > div > main > form > div.grid.grid--gutter-offset > div:nth-child(2) > div > div > div.media-uploader__wrap > div > div > figure"));
+                            break;
+                        }
+                        catch(Exception ex)
+                        {
+
+                        }
+                    }
                     break;
                 }
                 catch(Exception ex)
@@ -223,10 +235,14 @@ namespace KnatKahootBot
 
         private string GetHtmlCode()
         {
+
             string url = "https://www.google.com/search?q=" + testinput[count] + "&tbm=isch";
             string data = "";
 
             var request = (HttpWebRequest)WebRequest.Create(url);
+            request.Accept = "text/html, application/xhtml+xml, */*";
+            request.UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko";
+
             var response = (HttpWebResponse)request.GetResponse();
 
             using (Stream dataStream = response.GetResponseStream())
@@ -244,17 +260,17 @@ namespace KnatKahootBot
         private List<string> GetUrls(string html)
         {
             var urls = new List<string>();
-            int ndx = html.IndexOf("class=\"images_table\"", StringComparison.Ordinal);
-            ndx = html.IndexOf("<img", ndx, StringComparison.Ordinal);
+
+            int ndx = html.IndexOf("\"ou\"", StringComparison.Ordinal);
 
             while (ndx >= 0)
             {
-                ndx = html.IndexOf("src=\"", ndx, StringComparison.Ordinal);
-                ndx = ndx + 5;
+                ndx = html.IndexOf("\"", ndx + 4, StringComparison.Ordinal);
+                ndx++;
                 int ndx2 = html.IndexOf("\"", ndx, StringComparison.Ordinal);
                 string url = html.Substring(ndx, ndx2 - ndx);
                 urls.Add(url);
-                ndx = html.IndexOf("<img", ndx, StringComparison.Ordinal);
+                ndx = html.IndexOf("\"ou\"", ndx2, StringComparison.Ordinal);
             }
             return urls;
         }
@@ -270,11 +286,13 @@ namespace KnatKahootBot
                     return null;
                 using (var sr = new BinaryReader(dataStream))
                 {
-                    byte[] bytes = sr.ReadBytes(100000);
+                    byte[] bytes = sr.ReadBytes(100000000);
 
                     return bytes;
                 }
             }
+
+            return null;
         }
 
         public List<string> GetFakes(string real)

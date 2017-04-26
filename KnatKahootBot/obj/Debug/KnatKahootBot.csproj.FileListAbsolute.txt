@@ -13,3 +13,18 @@ c:\users\jorda\documents\visual studio 2017\Projects\KnatKahootBot\KnatKahootBot
 c:\users\jorda\documents\visual studio 2017\Projects\KnatKahootBot\KnatKahootBot\bin\Debug\WebDriver.xml
 c:\users\jorda\documents\visual studio 2017\Projects\KnatKahootBot\KnatKahootBot\bin\Debug\WebDriver.Support.dll
 c:\users\jorda\documents\visual studio 2017\Projects\KnatKahootBot\KnatKahootBot\bin\Debug\WebDriver.Support.xml
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\bin\Debug\KnatKahootBot.exe.config
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\bin\Debug\KnatKahootBot.exe
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\bin\Debug\KnatKahootBot.pdb
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\bin\Debug\MetroFramework.dll
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\bin\Debug\MetroFramework.Fonts.dll
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\bin\Debug\WebDriver.dll
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\bin\Debug\WebDriver.Support.dll
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\bin\Debug\WebDriver.xml
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\bin\Debug\WebDriver.Support.xml
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\obj\Debug\KnatKahootBot.csprojResolveAssemblyReference.cache
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\obj\Debug\KnatKahootBot.Form1.resources
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\obj\Debug\KnatKahootBot.Properties.Resources.resources
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\obj\Debug\KnatKahootBot.csproj.GenerateResource.Cache
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\obj\Debug\KnatKahootBot.exe
+C:\Users\Jordan\Documents\GitHub\KnatKahootBot\KnatKahootBot\obj\Debug\KnatKahootBot.pdb
