@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnatKahootBot", "KnatKahootBot\KnatKahootBot.csproj", "{B8F8FE25-DE7E-4F9F-82A9-01F2D14A3B2D}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{8D1D504F-3760-409A-9EBB-7BD89C90E5BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{B8F8FE25-DE7E-4F9F-82A9-01F2D14A3B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8F8FE25-DE7E-4F9F-82A9-01F2D14A3B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8F8FE25-DE7E-4F9F-82A9-01F2D14A3B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D1D504F-3760-409A-9EBB-7BD89C90E5BE}.Debug|Any CPU.ActiveCfg = Debug
+		{8D1D504F-3760-409A-9EBB-7BD89C90E5BE}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

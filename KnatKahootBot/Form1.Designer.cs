@@ -37,6 +37,7 @@
             this.metroCheckBox1 = new MetroFramework.Controls.MetroCheckBox();
             this.metroComboBox1 = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroCheckBox2 = new MetroFramework.Controls.MetroCheckBox();
             this.SuspendLayout();
             // 
             // metroButton1
@@ -50,14 +51,14 @@
             // 
             // metroTextBox1
             // 
-            this.metroTextBox1.Location = new System.Drawing.Point(114, 158);
+            this.metroTextBox1.Location = new System.Drawing.Point(124, 158);
             this.metroTextBox1.Name = "metroTextBox1";
             this.metroTextBox1.Size = new System.Drawing.Size(152, 23);
             this.metroTextBox1.TabIndex = 1;
             // 
             // metroTextBox2
             // 
-            this.metroTextBox2.Location = new System.Drawing.Point(114, 187);
+            this.metroTextBox2.Location = new System.Drawing.Point(124, 187);
             this.metroTextBox2.Name = "metroTextBox2";
             this.metroTextBox2.Size = new System.Drawing.Size(152, 23);
             this.metroTextBox2.TabIndex = 2;
@@ -73,14 +74,14 @@
             // 
             // metroTextBox3
             // 
-            this.metroTextBox3.Location = new System.Drawing.Point(114, 100);
+            this.metroTextBox3.Location = new System.Drawing.Point(124, 100);
             this.metroTextBox3.Name = "metroTextBox3";
             this.metroTextBox3.Size = new System.Drawing.Size(152, 23);
             this.metroTextBox3.TabIndex = 4;
             // 
             // metroTextBox4
             // 
-            this.metroTextBox4.Location = new System.Drawing.Point(114, 129);
+            this.metroTextBox4.Location = new System.Drawing.Point(124, 129);
             this.metroTextBox4.Name = "metroTextBox4";
             this.metroTextBox4.Size = new System.Drawing.Size(152, 23);
             this.metroTextBox4.TabIndex = 5;
@@ -103,7 +104,7 @@
             "Answer",
             "Question - Answer",
             "Answer - Question"});
-            this.metroComboBox1.Location = new System.Drawing.Point(115, 64);
+            this.metroComboBox1.Location = new System.Drawing.Point(125, 64);
             this.metroComboBox1.Name = "metroComboBox1";
             this.metroComboBox1.Size = new System.Drawing.Size(151, 29);
             this.metroComboBox1.TabIndex = 7;
@@ -117,11 +118,22 @@
             this.metroLabel1.TabIndex = 8;
             this.metroLabel1.Text = "Input Type";
             // 
+            // metroCheckBox2
+            // 
+            this.metroCheckBox2.AutoSize = true;
+            this.metroCheckBox2.Location = new System.Drawing.Point(23, 158);
+            this.metroCheckBox2.Name = "metroCheckBox2";
+            this.metroCheckBox2.Size = new System.Drawing.Size(97, 15);
+            this.metroCheckBox2.TabIndex = 9;
+            this.metroCheckBox2.Text = "Smart Distract";
+            this.metroCheckBox2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 223);
+            this.ClientSize = new System.Drawing.Size(290, 223);
+            this.Controls.Add(this.metroCheckBox2);
             this.Controls.Add(this.metroLabel1);
             this.Controls.Add(this.metroComboBox1);
             this.Controls.Add(this.metroCheckBox1);
@@ -150,6 +162,7 @@
         private MetroFramework.Controls.MetroCheckBox metroCheckBox1;
         private MetroFramework.Controls.MetroComboBox metroComboBox1;
         private MetroFramework.Controls.MetroLabel metroLabel1;
+        private MetroFramework.Controls.MetroCheckBox metroCheckBox2;
     }
 }
 

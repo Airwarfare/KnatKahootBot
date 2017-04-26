@@ -20,7 +20,9 @@ namespace KnatKahootBot
     {
 
         public ChromeDriver cd;
-        public List<string> testinput = new List<string>();
+        public List<string> AnswerInput = new List<string>();
+        public List<string> Questions = new List<string>();
+        public List<string> Answers = new List<string>();
         public int count = 0;
         public Form1()
         {
@@ -40,6 +42,7 @@ namespace KnatKahootBot
             metroTextBox4.Visible = false;
             metroButton2.Visible = false;
             metroCheckBox1.Visible = false;
+            metroCheckBox2.Visible = false;
             metroComboBox1.SelectedValueChanged += MetroComboBox1_SelectedValueChanged;
         }
 
@@ -49,6 +52,7 @@ namespace KnatKahootBot
             metroTextBox4.Visible = true;
             metroButton2.Visible = true;
             metroCheckBox1.Visible = true;
+            metroCheckBox2.Visible = true;
         }
 
         private void RemoveText(object sender, EventArgs e)
@@ -71,7 +75,7 @@ namespace KnatKahootBot
             PassBox.SendKeys(password);
             Button.Click();
             CreateQuiz();
-            for (int i = 0; i < testinput.Count; i++)
+            for (int i = 0; i < AnswerInput.Count; i++)
             {
                 CreateQuestion();
             }
@@ -152,10 +156,17 @@ namespace KnatKahootBot
             {
                 try
                 {
-                    
+
                     var TextInput = cd.FindElement(By.CssSelector("#ql-editor-1"));
                     TextInput.SendKeys("What animal is this?");
-                    var Fakes = GetFakes(testinput[count]);
+                    List<string> Fakes = new List<string>();
+                    if (metroCheckBox2.Checked)
+                        Fakes = GetFakes(AnswerInput[count]);
+                    else
+                    {
+                        Fakes = Answers;
+                        Fakes.RemoveAt(count);
+                    }
                     foreach (var s in Fakes)
                         Console.WriteLine("Fakes: " + s);
                     bool answer = false;
@@ -184,14 +195,14 @@ namespace KnatKahootBot
                         {
                             if (i == randomnumber)
                             {
-                                Input.SendKeys(testinput[count]);
+                                Input.SendKeys(AnswerInput[count]);
                                 var CheckBox = cd.FindElement(By.CssSelector(cssSelect));
                                 CheckBox.Click();
                                 answer = true;
                             }
                             else if (Fakes.Count == 0)
                             { 
-                                Input.SendKeys(testinput[count]);
+                                Input.SendKeys(AnswerInput[count]);
                                 var CheckBox = cd.FindElement(By.CssSelector(cssSelect));
                                 CheckBox.Click();
                                 answer = true;
@@ -252,7 +263,7 @@ namespace KnatKahootBot
         private string GetHtmlCode()
         {
 
-            string url = "https://www.google.com/search?q=" + testinput[count] + "&tbm=isch";
+            string url = "https://www.google.com/search?q=" + AnswerInput[count] + "&tbm=isch";
             string data = "";
 
             var request = (HttpWebRequest)WebRequest.Create(url);
@@ -315,16 +326,16 @@ namespace KnatKahootBot
         {
             string[] split = real.Split(' ');
             List<string> fakes = new List<string>();
-            foreach(string s in testinput)
+            foreach(string s in AnswerInput)
                 for (int i = 0; i < split.Length; i++)
                     if (s.Contains(split[i]) && s != real)
                         fakes.Add(s);
             while(!(fakes.Count >= 3))
             {
                 Random r = new Random();
-                string hold = testinput[r.Next(0, testinput.Count)];
+                string hold = AnswerInput[r.Next(0, AnswerInput.Count)];
                 Console.WriteLine("Loop: " + hold);
-                if(!fakes.Contains(hold))
+                if(hold != real && !fakes.Contains(hold))
                 {
                     fakes.Add(hold);
                     Console.WriteLine("Add");
@@ -343,24 +354,48 @@ namespace KnatKahootBot
                 string line;
                 while ((line = openFile.ReadLine()) != null)
                 {
+                    bool foundChar = false;
+                    List<char> answer = new List<char>();
+                    List<char> question = new List<char>();
                     if(metroComboBox1.SelectedIndex == 0)
-                        testinput.Add(line);
+                        AnswerInput.Add(line);
                     else if(metroComboBox1.SelectedIndex == 1)
                     {
-
+                        foreach(char c in line)
+                        {
+                            if (c == '-')
+                            {
+                                foundChar = true;
+                                continue;
+                            }
+                            if (!foundChar)
+                                question.Add(c);
+                            else
+                                answer.Add(c);
+                        }
                     }
                     else if(metroComboBox1.SelectedIndex == 2)
                     {
-
+                        foreach(char c in line)
+                        {
+                            if(c == '-')
+                            {
+                                foundChar = true;
+                                continue;
+                            }
+                            if (!foundChar)
+                                answer.Add(c);
+                            else
+                                question.Add(c);
+                        }
                     }
                 }
-
                 openFile.Close();
             }
             metroButton1.Visible = true;
             metroTextBox1.Visible = true;
             metroTextBox2.Visible = true;
-            foreach(var s in testinput)
+            foreach(var s in AnswerInput)
             {
                 Console.WriteLine(s);
             }
