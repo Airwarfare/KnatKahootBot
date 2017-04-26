@@ -36,6 +36,19 @@ namespace KnatKahootBot
             metroTextBox1.Visible = false;
             metroTextBox2.Visible = false;
             metroButton1.Visible = false;
+            metroTextBox3.Visible = false;
+            metroTextBox4.Visible = false;
+            metroButton2.Visible = false;
+            metroCheckBox1.Visible = false;
+            metroComboBox1.SelectedValueChanged += MetroComboBox1_SelectedValueChanged;
+        }
+
+        private void MetroComboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            metroTextBox3.Visible = true;
+            metroTextBox4.Visible = true;
+            metroButton2.Visible = true;
+            metroCheckBox1.Visible = true;
         }
 
         private void RemoveText(object sender, EventArgs e)
@@ -190,26 +203,28 @@ namespace KnatKahootBot
                             }
                         }
                     }
-                    
-                    while(true)
+                    if (metroCheckBox1.Checked)
                     {
-                        try
+                        while (true)
                         {
-                            string html = GetHtmlCode();
-                            List<string> urls = GetUrls(html);
-                            byte[] image = GetImage(urls[r.Next(0, 4)]);
-                            using (var ms = new MemoryStream(image))
+                            try
                             {
-                                Image.FromStream(ms).Save(@"C:\Users\jorda\Downloads\test.jpg");
+                                string html = GetHtmlCode();
+                                List<string> urls = GetUrls(html);
+                                byte[] image = GetImage(urls[r.Next(0, 4)]);
+                                using (var ms = new MemoryStream(image))
+                                {
+                                    Image.FromStream(ms).Save(@"C:\Users\jorda\Downloads\test.jpg");
+                                }
+                                var Test = cd.FindElement(By.CssSelector("#image-uploader"));
+                                Test.SendKeys(@"C:\Users\jorda\Downloads\test.jpg");
+                                var holdImage = cd.FindElement(By.CssSelector("#app > div > div > div > main > form > div.grid.grid--gutter-offset > div:nth-child(2) > div > div > div.media-uploader__wrap > div > div > figure"));
+                                break;
                             }
-                            var Test = cd.FindElement(By.CssSelector("#image-uploader"));
-                            Test.SendKeys(@"C:\Users\jorda\Downloads\test.jpg");
-                            var holdImage = cd.FindElement(By.CssSelector("#app > div > div > div > main > form > div.grid.grid--gutter-offset > div:nth-child(2) > div > div > div.media-uploader__wrap > div > div > figure"));
-                            break;
-                        }
-                        catch(Exception ex)
-                        {
-                            //Console.WriteLine(ex);
+                            catch (Exception ex)
+                            {
+                                //Console.WriteLine(ex);
+                            }
                         }
                     }
                     break;
@@ -328,7 +343,16 @@ namespace KnatKahootBot
                 string line;
                 while ((line = openFile.ReadLine()) != null)
                 {
-                    testinput.Add(line);
+                    if(metroComboBox1.SelectedIndex == 0)
+                        testinput.Add(line);
+                    else if(metroComboBox1.SelectedIndex == 1)
+                    {
+
+                    }
+                    else if(metroComboBox1.SelectedIndex == 2)
+                    {
+
+                    }
                 }
 
                 openFile.Close();
