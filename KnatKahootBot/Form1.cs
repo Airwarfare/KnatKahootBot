@@ -49,7 +49,7 @@ namespace KnatKahootBot
 
         public void Login(string username, string password)
         {
-            cd = new ChromeDriver(@"C:\Users\Jordan\Desktop\");
+            cd = new ChromeDriver(@"C:\Users\jorda\Desktop\");
             cd.Navigate().GoToUrl("https://create.kahoot.it/login");
             var LoginBox = cd.FindElement(By.CssSelector("#username-input-field__input"));
             var PassBox = cd.FindElement(By.CssSelector("#password-input-field__input"));
@@ -121,7 +121,7 @@ namespace KnatKahootBot
 
         public void CreateQuestion()
         {
-            File.Delete(@"C:\Users\Jordan\Downloads\test.jpg");
+            File.Delete(@"C:\Users\jorda\Downloads\test.jpg");
             while (true)
             {
                 try
@@ -141,7 +141,7 @@ namespace KnatKahootBot
                 {
                     
                     var TextInput = cd.FindElement(By.CssSelector("#ql-editor-1"));
-                    TextInput.SendKeys("What Animal Is this?");
+                    TextInput.SendKeys("What animal is this?");
                     var Fakes = GetFakes(testinput[count]);
                     foreach (var s in Fakes)
                         Console.WriteLine("Fakes: " + s);
@@ -190,32 +190,33 @@ namespace KnatKahootBot
                             }
                         }
                     }
-                    string html = GetHtmlCode();
-                    List<string> urls = GetUrls(html);
-                    byte[] image = GetImage(urls[r.Next(0,4)]);
-                    using (var ms = new MemoryStream(image))
-                    {
-                        Image.FromStream(ms).Save(@"C:\Users\Jordan\Downloads\test.jpg");
-                    }
-                    var Test = cd.FindElement(By.CssSelector("#image-uploader"));
-                    Test.SendKeys(@"C:\Users\Jordan\Downloads\test.jpg");
+                    
                     while(true)
                     {
                         try
                         {
-                            var Image = cd.FindElement(By.CssSelector("#app > div > div > div > main > form > div.grid.grid--gutter-offset > div:nth-child(2) > div > div > div.media-uploader__wrap > div > div > figure"));
+                            string html = GetHtmlCode();
+                            List<string> urls = GetUrls(html);
+                            byte[] image = GetImage(urls[r.Next(0, 4)]);
+                            using (var ms = new MemoryStream(image))
+                            {
+                                Image.FromStream(ms).Save(@"C:\Users\jorda\Downloads\test.jpg");
+                            }
+                            var Test = cd.FindElement(By.CssSelector("#image-uploader"));
+                            Test.SendKeys(@"C:\Users\jorda\Downloads\test.jpg");
+                            var holdImage = cd.FindElement(By.CssSelector("#app > div > div > div > main > form > div.grid.grid--gutter-offset > div:nth-child(2) > div > div > div.media-uploader__wrap > div > div > figure"));
                             break;
                         }
                         catch(Exception ex)
                         {
-
+                            //Console.WriteLine(ex);
                         }
                     }
                     break;
                 }
                 catch(Exception ex)
                 {
-
+                    Console.WriteLine(ex);
                 }
             }
             count++;
