@@ -66,7 +66,7 @@ namespace KnatKahootBot
 
         public void Login(string username, string password)
         {
-            cd = new ChromeDriver(@"C:\Users\jorda\Desktop\");
+            cd = new ChromeDriver(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
             cd.Navigate().GoToUrl("https://create.kahoot.it/login");
             var LoginBox = cd.FindElement(By.CssSelector("#username-input-field__input"));
             var PassBox = cd.FindElement(By.CssSelector("#password-input-field__input"));
@@ -138,7 +138,7 @@ namespace KnatKahootBot
 
         public void CreateQuestion()
         {
-            File.Delete(@"C:\Users\jorda\Downloads\test.jpg");
+            File.Delete(System.Environment.GetEnvironmentVariable("USERPROFILE") + "/Downloads/test.jpg");
             while (true)
             {
                 try
@@ -225,10 +225,10 @@ namespace KnatKahootBot
                                 byte[] image = GetImage(urls[r.Next(0, 4)]);
                                 using (var ms = new MemoryStream(image))
                                 {
-                                    Image.FromStream(ms).Save(@"C:\Users\jorda\Downloads\test.jpg");
+                                    Image.FromStream(ms).Save(System.Environment.GetEnvironmentVariable("USERPROFILE") + "/Downloads/test.jpg");
                                 }
                                 var Test = cd.FindElement(By.CssSelector("#image-uploader"));
-                                Test.SendKeys(@"C:\Users\jorda\Downloads\test.jpg");
+                                Test.SendKeys(System.Environment.GetEnvironmentVariable("USERPROFILE") + "/Downloads/test.jpg");
                                 var holdImage = cd.FindElement(By.CssSelector("#app > div > div > div > main > form > div.grid.grid--gutter-offset > div:nth-child(2) > div > div > div.media-uploader__wrap > div > div > figure"));
                                 break;
                             }
